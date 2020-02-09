@@ -1,3 +1,4 @@
+EXPORTS
 ;; libgcrypt.defs -  Exported symbols for W32
 ;; Copyright (C) 2003, 2007 Free Software Foundation, Inc.
 ;;
@@ -22,7 +23,6 @@
 ;; never be changed.  Also check libgcrypt.vers and visibility.h.
 
 
-EXPORTS
       gcry_check_version  @1
       gcry_control  @2
 

@@ -38,13 +38,10 @@ m4_define(mym4_version_micro, [5])
 # processing is done by autoconf and not during the configure run.
 m4_define(mym4_version,
           [mym4_version_major.mym4_version_minor.mym4_version_micro])
-m4_define([mym4_revision],
-          m4_esyscmd([git rev-parse --short HEAD | tr -d '\n\r']))
+m4_define([mym4_revision], [4091])
 m4_define([mym4_revision_dec],
           m4_esyscmd_s([echo $((0x$(echo ]mym4_revision[|head -c 4)))]))
-m4_define([mym4_betastring],
-          m4_esyscmd_s([git describe --match 'libgcrypt-[0-9].*[0-9]' --long|\
-                        awk -F- '$3!=0{print"-beta"$3}']))
+m4_define([mym4_betastring], [])
 m4_define([mym4_isgit],m4_if(mym4_betastring,[],[no],[yes]))
 m4_define([mym4_full_version],[mym4_version[]mym4_betastring])
 
@@ -74,7 +71,24 @@ VERSION=$PACKAGE_VERSION
 
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_SRCDIR([src/libgcrypt.vers])
-AM_INIT_AUTOMAKE([serial-tests dist-bzip2])
+
+dnl Initialize automake.  automake < 1.12 didn't have serial-tests and
+dnl gives an error if it sees this, but for automake >= 1.13
+dnl serial-tests is required so we have to include it.  Solution is to
+dnl test for the version of automake (by running an external command)
+dnl and provide it if necessary.  Note we have to do this entirely using
+dnl m4 macros since automake queries this macro by running
+dnl 'autoconf --trace ...'.
+m4_define([serial_tests], [
+    m4_esyscmd([automake --version |
+                head -1 |
+                awk '{split ($NF,a,"."); if (a[1] == 1 && a[2] >= 12) { '\
+                    'print "serial-tests" }}'
+    ])
+])
+dnl NB: Do not [quote] this parameter.
+AM_INIT_AUTOMAKE(serial_tests dist-bzip2)
+
 AC_CONFIG_HEADER(config.h)
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_LIBOBJ_DIR([compat])

@@ -102,7 +102,9 @@ AC_DEFUN([GNUPG_SYS_SYMBOL_UNDERSCORE],
 [tmp_do_check="no"
 case "${host}" in
     i?86-mingw32* | i?86-*-mingw32*)
-        ac_cv_sys_symbol_underscore=yes
+        if test "x$ac_cv_sys_symbol_underscore" = x ; then
+           ac_cv_sys_symbol_underscore=yes
+        fi
         ;;
     x86_64-*-mingw32*)
         ac_cv_sys_symbol_underscore=no

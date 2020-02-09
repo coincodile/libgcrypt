@@ -4,5 +4,9 @@
 #if __GNUC__ >= 3 && defined(__x86_64__) && defined(__ILP32__)
 #define BYTES_PER_MPI_LIMB 8
 #else
+#ifdef _WIN64
+#define BYTES_PER_MPI_LIMB  (SIZEOF_UNSIGNED_LONG_LONG)
+#else
 #define BYTES_PER_MPI_LIMB  (SIZEOF_UNSIGNED_LONG)
+#endif
 #endif
