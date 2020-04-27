@@ -81,6 +81,7 @@ AC_CONFIG_LIBOBJ_DIR([compat])
 AC_CANONICAL_HOST
 AM_MAINTAINER_MODE
 AM_SILENT_RULES
+AC_INIT_LGE
 
 AC_ARG_VAR(SYSROOT,[locate config scripts also below that directory])
 
@@ -180,6 +181,7 @@ LT_LANG([Windows Resource])
 ##########################
 ## General definitions. ##
 ##########################
+AC_LGE_EXT_CIPHER(xor)
 
 # Used by libgcrypt-config
 LIBGCRYPT_CONFIG_LIBS="-lgcrypt"
@@ -189,6 +191,7 @@ LIBGCRYPT_CONFIG_HOST="$host"
 # Definitions for symmetric ciphers.
 available_ciphers="arcfour blowfish cast5 des aes twofish serpent rfc2268 seed"
 available_ciphers="$available_ciphers camellia idea salsa20 gost28147 chacha20"
+available_ciphers="$available_ciphers $lge_ciphers"
 enabled_ciphers=""
 
 # Definitions for public-key ciphers.
@@ -2009,6 +2012,8 @@ fi
 
 # Define conditional sources and config.h symbols depending on the
 # selected ciphers, pubkey-ciphers, digests, kdfs, and random modules.
+AC_LGE_EXT_ENALBE($enabled_ciphers)
+GCRYPT_CIPHERS="$GCRYPT_CIPHERS $lge_ciphers_libs"
 
 LIST_MEMBER(arcfour, $enabled_ciphers)
 if test "$found" = "1"; then
@@ -2608,6 +2613,8 @@ m4/Makefile
 compat/Makefile
 mpi/Makefile
 cipher/Makefile
+cipher/cipher.c
+src/cipher.h
 random/Makefile
 doc/Makefile
 src/Makefile

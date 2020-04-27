@@ -31,6 +31,8 @@
 
 #include <sys/types.h>
 
+@LGE_HEADER_CONFIG_CONDITION_FILE@
+
 #if defined _WIN32 || defined __WIN32__
 # include <winsock2.h>
 # include <ws2tcpip.h>
@@ -191,7 +193,6 @@ gcry_error_t gcry_err_make_from_errno (gcry_err_source_t source, int err);
 /* Return an error value with the system error ERR.  */
 gcry_error_t gcry_error_from_errno (int err);
 
-
 /* NOTE: Since Libgcrypt 1.6 the thread callbacks are not anymore
    used.  However we keep it to allow for some source code
    compatibility if used in the standard way.  */
@@ -226,7 +227,6 @@ struct gcry_thread_cbs
     (GCRY_THREAD_OPTION_PTHREAD | (GCRY_THREAD_OPTION_VERSION << 8))}
 
 
-
 /* A generic context object as used by some functions.  */
 struct gcry_context;
 typedef struct gcry_context *gcry_ctx_t;
@@ -252,7 +252,6 @@ typedef struct
 } gcry_buffer_t;
 
 
-
 
 /* Check that the library fulfills the version requirement.  */
 const char *gcry_check_version (const char *req_version);
@@ -338,7 +337,6 @@ enum gcry_ctl_cmds
 /* Perform various operations defined by CMD. */
 gcry_error_t gcry_control (enum gcry_ctl_cmds CMD, ...);
 
-
 /* S-expression management. */
 
 /* The object to represent an S-expression as used with the public key
@@ -523,7 +521,6 @@ gpg_error_t gcry_sexp_extract_param (gcry_sexp_t sexp,
                                      const char *list,
                                      ...) _GCRY_GCC_ATTR_SENTINEL(0);
 
-
 /*******************************************
  *                                         *
  *  Multi Precision Integer Functions      *
@@ -891,7 +888,6 @@ gcry_mpi_t _gcry_mpi_get_const (int no);
 #endif /* GCRYPT_NO_MPI_MACROS */
 
 
-
 /************************************
  *                                  *
  *   Symmetric Cipher Functions     *
@@ -939,7 +935,11 @@ enum gcry_cipher_algos
     GCRY_CIPHER_SALSA20     = 313,
     GCRY_CIPHER_SALSA20R12  = 314,
     GCRY_CIPHER_GOST28147   = 315,
-    GCRY_CIPHER_CHACHA20    = 316
+    GCRY_CIPHER_CHACHA20    = 316,
+    /*
+     * Extensions: all ids starts from 1000
+     */
+	@LGE_HEADER_CONFIG_CIPHERID_FILE@
   };
 
 /* The Rijndael algorithm is basically AES, so provide some macros. */
@@ -1092,7 +1092,6 @@ size_t gcry_cipher_get_algo_blklen (int algo);
 #define gcry_cipher_test_algo(a) \
             gcry_cipher_algo_info( (a), GCRYCTL_TEST_ALGO, NULL, NULL )
 
-
 /************************************
  *                                  *
  *    Asymmetric Cipher Functions   *
@@ -1191,8 +1190,6 @@ gcry_sexp_t gcry_pk_get_param (int algo, const char *name);
 /* Return an S-expression representing the context CTX.  */
 gcry_error_t gcry_pubkey_get_sexp (gcry_sexp_t *r_sexp,
                                    int mode, gcry_ctx_t ctx);
-
-
 
 /************************************
  *                                  *
@@ -1390,8 +1387,6 @@ void gcry_md_debug (gcry_md_hd_t hd, const char *suffix);
 #define gcry_md_get_asnoid(a,b,n) \
             gcry_md_algo_info((a), GCRYCTL_GET_ASNOID, (b), (n))
 
-
-
 /**********************************************
  *                                            *
  *   Message Authentication Code Functions    *
@@ -1521,7 +1516,6 @@ int gcry_mac_map_name (const char *name) _GCRY_GCC_ATTR_PURE;
 #define gcry_mac_test_algo(a) \
             gcry_mac_algo_info( (a), GCRYCTL_TEST_ALGO, NULL, NULL )
 
-
 /******************************
  *                            *
  *  Key Derivation Functions  *
@@ -1549,7 +1543,6 @@ gpg_error_t gcry_kdf_derive (const void *passphrase, size_t passphraselen,
 
 
 
-
 /************************************
  *                                  *
  *   Random Generating Functions    *
@@ -1618,7 +1611,6 @@ void gcry_create_nonce (void *buffer, size_t length);
 
 
 
-
 /*******************************/
 /*                             */
 /*    Prime Number Functions   */
@@ -1677,7 +1669,6 @@ void gcry_prime_release_factors (gcry_mpi_t *factors);
 gcry_error_t gcry_prime_check (gcry_mpi_t x, unsigned int flags);
 
 
-
 /************************************
  *                                  *
  *     Miscellaneous Stuff          *

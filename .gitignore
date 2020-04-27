@@ -66,7 +66,6 @@ src/libgcrypt-config
 src/libgcrypt.la
 src/mpicalc
 src/versioninfo.rc
-src/*.exe
 tests/Makefile
 tests/ac
 tests/ac-data
@@ -104,4 +103,23 @@ tests/t-mpi-point
 tests/t-sexp
 tests/tsexp
 tests/version
+tests/t-secmem
+
+# Windows
+src/*.exe
 tests/*.exe
+
+# Eclipse
+/.project
+/.settings/
+/.cproject
+/config.h.in~
+/.autotools
+
+# LGE
+/lge_gcrypt_*.h
+
+/libgcrypt-*/
+/src/libgcrypt.pc
+/src/cipher.h
+/cipher/cipher.c
