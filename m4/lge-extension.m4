@@ -12,7 +12,7 @@ AC_DEFUN([AC_INIT_LGE],[
 	# List of all cipher id where loaded from extensions
 	LGE_HEADER_CONFIG_CIPHERID_FILE="lge_gcrypt_cipherid.h"
 	echo '/* Auto Generated Cipher ID */' > $LGE_HEADER_CONFIG_CIPHERID_FILE
-	lge_header_cipherid=1000
+	lge_header_cipherid=320
 	# List of all preconditions to add in gcrypt header file
 	LGE_HEADER_CONFIG_CONDITION_FILE="lge_gcrypt_pre.h"
 	echo '/* Auto Generated Code */' > $LGE_HEADER_CONFIG_CONDITION_FILE
