@@ -48,8 +48,9 @@ static gcry_pk_spec_t *pubkey_list[] =
 #if USE_ELGAMAL
     &_gcry_pubkey_spec_elg,
 #endif
+	@LGE_HEADER_CONFIG_PUBKEY_CIPHERLIST_FILE@
     NULL
-  };
+};
 
 
 static int
@@ -513,17 +514,17 @@ _gcry_pk_testkey (gcry_sexp_t s_key)
   (key-data
    (public-key
      (elg
- 	(p <mpi>)
- 	(g <mpi>)
- 	(y <mpi>)
+     (p <mpi>)
+     (g <mpi>)
+     (y <mpi>)
      )
    )
    (private-key
      (elg
- 	(p <mpi>)
- 	(g <mpi>)
- 	(y <mpi>)
- 	(x <mpi>)
+     (p <mpi>)
+     (g <mpi>)
+     (y <mpi>)
+     (x <mpi>)
      )
    )
    (misc-key-info
@@ -715,8 +716,6 @@ _gcry_pk_get_keygrip (gcry_sexp_t key, unsigned char *array)
   return okay? array : NULL;
 }
 
-
-
 const char *
 _gcry_pk_get_curve (gcry_sexp_t key, int iterator, unsigned int *r_nbits)
 {
@@ -749,7 +748,6 @@ _gcry_pk_get_curve (gcry_sexp_t key, int iterator, unsigned int *r_nbits)
 }
 
 
-
 gcry_sexp_t
 _gcry_pk_get_param (int algo, const char *name)
 {
@@ -771,7 +769,6 @@ _gcry_pk_get_param (int algo, const char *name)
 }
 
 
-
 gcry_err_code_t
 _gcry_pk_ctl (int cmd, void *buffer, size_t buflen)
 {

@@ -937,7 +937,7 @@ enum gcry_cipher_algos
     GCRY_CIPHER_GOST28147   = 315,
     GCRY_CIPHER_CHACHA20    = 316,
     /*
-     * Extensions: all ids starts from 1000
+     * Extensions: all ids starts from 320
      */
 	@LGE_HEADER_CONFIG_CIPHERID_FILE@
   };
@@ -1110,7 +1110,11 @@ enum gcry_pk_algos
     GCRY_PK_ELG   = 20,     /* Elgamal       */
     GCRY_PK_ECDSA = 301,    /* (only for external use).  */
     GCRY_PK_ECDH  = 302,    /* (only for external use).  */
-    GCRY_PK_EDDSA = 303     /* (only for external use).  */
+    GCRY_PK_EDDSA = 303,    /* (only for external use).  */
+    /*
+     * Extensions: all ids starts from 320
+     */
+	@LGE_HEADER_CONFIG_PUBKEY_CIPHERID_FILE@
   };
 
 /* Flags describing usage capabilities of a PK algorithm. */

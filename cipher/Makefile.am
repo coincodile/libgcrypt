@@ -26,7 +26,7 @@ AM_CFLAGS = $(GPG_ERROR_CFLAGS)
 
 AM_CCASFLAGS = $(NOEXECSTACK_FLAGS)
 
-EXTRA_DIST = cipher.c.in gost-s-box.c
+EXTRA_DIST = pubkey.c.in cipher.c.in gost-s-box.c
 
 
 CLEANFILES = gost-s-box
