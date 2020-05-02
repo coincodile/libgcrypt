@@ -123,3 +123,4 @@ tests/*.exe
 /src/libgcrypt.pc
 /src/cipher.h
 /cipher/cipher.c
+/cipher/pubkey.c
